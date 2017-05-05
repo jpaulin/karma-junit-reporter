@@ -210,15 +210,6 @@ var JUnitReporter = function (baseReporterDecorator, config, logger, helper, for
       }
     }
 
-    // create the tag for a new test case
-    /*
-    if (NEWXML) {
-      spec = testsuite.ele('testCase', {
-      name: nameFormatter(browser, result),
-      duration: validMilliTime })
-    }
-    */
-
     if (NEWXML) {
       spec = exposee.ele('testCase', {
         name: nameFormatter(browser, result),
