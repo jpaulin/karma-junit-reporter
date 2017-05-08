@@ -94,6 +94,13 @@ var JUnitReporter = function (baseReporterDecorator, config, logger, helper, for
 
   // This function takes care of writing the XML into a file
   var writeXmlForBrowser = function (browser) {
+    // First check exit conditions - no joy doing anything else if we are done
+    var xmlToOutput = suites[browser.id]
+
+    if (!xmlToOutput) {
+      return // don't die if browser didn't start
+    }
+
     // Define the file name using rules
     var safeBrowserName = browser.name.replace(/ /g, '_')
     var newOutputFile
@@ -107,12 +114,6 @@ var JUnitReporter = function (baseReporterDecorator, config, logger, helper, for
       newOutputFile = path.join(outputDir, 'TESTS-' + safeBrowserName + '.xml')
     } else {
       newOutputFile = path.join(outputDir, 'TESTS.xml')
-    }
-
-    var xmlToOutput = suites[browser.id]
-
-    if (!xmlToOutput) {
-      return // don't die if browser didn't start
     }
 
     pendingFileWritings++
